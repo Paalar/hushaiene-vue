@@ -11,11 +11,11 @@ export default {
 </script>
 
 <style lang='stylus' scoped>
-    @font-face {
-        font-family: 'Open Sans';
-        src: url('./assets/fonts/Open_Sans/OpenSans-Regular.ttf');
-    }
+@font-face {
+    font-family: 'Open Sans';
+    src: url('./assets/fonts/Open_Sans/OpenSans-Regular.ttf');
+}
 
-    #app
-        font-family 'Open Sans'
+#app
+    font-family 'Open Sans'
 </style>
