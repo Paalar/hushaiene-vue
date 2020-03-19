@@ -16,6 +16,8 @@ if (user === undefined) {
     }
 }
 
+export default {
+
 };
 </script>
 
