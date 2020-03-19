@@ -1,20 +1,17 @@
 <template>
     <div class="pageContent">
-        {{ content }}
+        <slot></slot>
     </div>
 </template>
 
 <script lang="ts">
-import { Prop, Component, Vue } from 'vue-property-decorator';
-
-@Component
-export default class PageContent extends Vue {
-    @Prop() private content!: Vue
-}
+export default {
+    name: 'PageContent',
+};
 </script>
 
-<style lang='stylus' scoped>
+<style lang='stylus'>
 .pageContent
-    background-color red
     margin auto
+    width 50%
 </style>

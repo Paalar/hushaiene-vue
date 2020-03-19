@@ -2,8 +2,8 @@
     <div>
         <nav-header/>
         <page-content>
-            <div class="about">
-                <h1>This is an about page</h1>
+            <div class="regulations">
+                Lover og regler
             </div>
         </page-content>
         <page-footer/>
@@ -17,7 +17,7 @@ import Header from '@/components/Header.vue';
 import Footer from '@/components/Footer.vue';
 
 export default Vue.extend({
-    name: 'About',
+    name: 'Regulations',
     components: {
         'nav-header': Header,
         'page-content': PageContent,
