@@ -1,11 +1,11 @@
 <template>
-    <page-content>
+    <page>
         <div class="login">
             <button v-on:click="signInGoogle">
                 Login
             </button>
         </div>
-    </page-content>
+    </page>
 </template>
 
 <script lang="ts">
@@ -14,14 +14,14 @@ import store from '@/store';
 // import storeTypes from '@/store/types';
 import firebase from 'firebase';
 import router from '@/router';
-import PageContent from '@/components/PageContent.vue';
+import Page from '@/components/Page.vue';
 
 const provider = new firebase.auth.GoogleAuthProvider();
 
 export default Vue.extend({
     name: 'Login',
     components: {
-        'page-content': PageContent,
+        Page,
     },
     methods: {
         signInGoogle: () => {
