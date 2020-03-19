@@ -1,18 +1,33 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to /home"/>
-  </div>
+    <div>
+        <nav-header/>
+        <page-content>
+            <div class="home">
+                <h1>Home</h1>
+                <p v-if="isLoggedIn">Welcome, {{ name }}</p>
+            </div>
+        </page-content>
+        <page-footer/>
+    </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
+<script lang="ts">
+import Vue from 'vue';
+import store from '@/store';
+import PageContent from '@/components/PageContent.vue';
+import Header from '@/components/Header.vue';
+import Footer from '@/components/Footer.vue';
 
-export default {
+export default Vue.extend({
     name: 'Home',
     components: {
-        HelloWorld,
+        'page-content': PageContent,
+        'nav-header': Header,
+        'page-footer': Footer,
     },
-};
+    data: () => ({
+        name: store.getters.userDisplayName,
+        isLoggedIn: store.getters.isLoggedIn,
+    }),
+});
 </script>

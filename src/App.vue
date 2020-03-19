@@ -5,17 +5,28 @@
 </template>
 
 <script lang='ts'>
-export default {
+import store from '@/store';
+
+const { user } = store.getters;
+if (user === undefined) {
+    const { localStorageUser } = store.getters;
+    // const { localStorageToken } = store.getters;
+    if (localStorageUser != null) {
+        store.dispatch('signIn', localStorageUser);
+    }
+}
 
 };
 </script>
 
-<style lang='stylus' scoped>
-    @font-face {
-        font-family: 'Open Sans';
-        src: url('./assets/fonts/Open_Sans/OpenSans-Regular.ttf');
-    }
+<style lang='stylus'>
+@font-face {
+    font-family: 'Open Sans';
+    src: url('./assets/fonts/Open_Sans/OpenSans-Regular.ttf');
+}
 
-    #app
-        font-family 'Open Sans'
+#app
+    font-family 'Open Sans'
+body
+    margin 0
 </style>
