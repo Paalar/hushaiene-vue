@@ -1,20 +1,27 @@
 <template>
     <header>
-        <h1 id="title" v-on:click="goHome">Hushaiene</h1>
+        <h1 id="title">Hushaiene</h1>
         <h3
-            v-bind:class="['subTitle', {'activePage' : isActive === '/'}]"
-            v-on:click="goHome"
+            v-bind:class="['subTitle', {'activePage' : isActive === home.path}]"
+            v-on:click="pushLocation(home.name, home.path)"
             >Utleiere</h3>
         <h3
-            v-bind:class="['subTitle', {'activePage' : isActive === '/lover'}]"
-            v-on:click="goRegulations"
+            v-bind:class="['subTitle', {'activePage' : isActive === regulations.path}]"
+            v-on:click="pushLocation(regulations.name, regulations.path)"
             >Lover & regler</h3>
         <h3
-            v-bind:class="['subTitle', {'activePage' : isActive === '/om'}]"
-            v-on:click="goAbout"
+            v-bind:class="['subTitle', {'activePage' : isActive === about.path}]"
+            v-on:click="pushLocation(about.name, about.path)"
             class="subTitle"
             >Om siden</h3>
-        <button v-if="!isLoggedIn" v-on:click="goLogin">Logg inn</button>
+        <h3
+            v-bind:class="['subTitle', {'activePage' : isActive === createPost.path}]"
+            v-on:click="pushLocation(createPost.name, createPost.path)"
+            class="subTitle"
+            >Nytt Innlegg</h3>
+        <button v-if="!isLoggedIn" v-on:click="pushLocation(login.name, login.path)">
+            Logg inn
+        </button>
         <button v-else v-on:click="signOut">Logg ut</button>
     </header>
 </template>
@@ -27,28 +34,10 @@ import router from '@/router';
 
 export default Vue.extend({
     methods: {
-        goHome: () => {
+        pushLocation: (componentName: string, path: string) => {
             const currentComponent = router.currentRoute.name;
-            if (currentComponent !== 'Home') {
-                router.push('/');
-            }
-        },
-        goLogin: () => {
-            const currentComponent = router.currentRoute.name;
-            if (currentComponent !== 'Login') {
-                router.push('login');
-            }
-        },
-        goAbout: () => {
-            const currentComponent = router.currentRoute.name;
-            if (currentComponent !== 'About') {
-                router.push('om');
-            }
-        },
-        goRegulations: () => {
-            const currentComponent = router.currentRoute.name;
-            if (currentComponent !== 'Regulations') {
-                router.push('lover');
+            if (currentComponent !== componentName) {
+                router.push(path);
             }
         },
         signOut: () => {
@@ -67,6 +56,26 @@ export default Vue.extend({
     data: () => ({
         isLoggedIn: store.getters.isLoggedIn,
         isActive: window.location.pathname,
+        about: {
+            path: '/om',
+            name: 'About',
+        },
+        regulations: {
+            path: '/lover',
+            name: 'Regulations',
+        },
+        createPost: {
+            path: '/nytt-innlegg',
+            name: 'Create Post',
+        },
+        home: {
+            path: '/',
+            name: 'Home',
+        },
+        login: {
+            path: '/login',
+            name: 'Login',
+        },
     }),
 });
 </script>

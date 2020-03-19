@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="page">
         <nav-header />
         <div class="pageContent">
             <slot></slot>
@@ -23,7 +23,17 @@ export default Vue.extend({
 </script>
 
 <style lang="stylus">
+    .page
+        display grid
+        grid-template-areas "header header header" "nav content side" "footer footer footer"
+        grid-template-columns 1fr 1fr 1fr
+        grid-template-rows auto 1fr auto
+        height 100vh
+
+    header
+        grid-area header
     .pageContent
-        margin auto
-        width 50%
+        grid-area content
+    footer
+        grid-area footer
 </style>
