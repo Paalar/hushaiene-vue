@@ -2,7 +2,7 @@
     <page>
         <card>
             <h1>Nytt innlegg </h1>
-            <form>
+            <form @submit="post">
                 <div class="input" id="name">
                     <label><b>UTLEIER</b></label>
                     <input
@@ -60,7 +60,11 @@
 </template>
 
 <script lang="ts">
+import moment from 'moment';
 import Vue from 'vue';
+import store from '@/store';
+import router from '@/router';
+import firebase from '@/firebase';
 import Page from '@/components/Page.vue';
 import Card from '@/components/Card.vue';
 
@@ -91,6 +95,27 @@ export default Vue.extend({
             } else {
                 this.disabled = true;
             }
+        },
+        post(event: Event) {
+            event.preventDefault();
+            firebase.postsCollection.add({
+                created: moment().format(),
+                likes: 0,
+                comments: 0,
+                userId: store.getters.user.uid,
+                userName: store.getters.user.displayName,
+                landlord: this.name,
+                city: this.city,
+                address: this.address,
+                description: this.description,
+                isAnonymous: this.anonymous,
+            }).then((result) => {
+                console.log(result);
+                router.push('/');
+            }).catch((error) => {
+                // TODO better error handling
+                console.log(error);
+            });
         },
     },
 });
