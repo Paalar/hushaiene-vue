@@ -49,8 +49,7 @@
 
                 <button
                     :disabled="disabled"
-                    v-bind:class="{'buttonDisabled' : disabled}"
-                    id="post"
+                    :class="['post', {'buttonDisabled' : disabled}]"
                     type="submit">
                     Send inn
                 </button>
@@ -121,6 +120,8 @@ export default Vue.extend({
 </script>
 
 <style lang="stylus">
+    .page
+        align-self center
     form
         display grid
         grid-template-areas \
@@ -130,15 +131,15 @@ export default Vue.extend({
             "toggle empty empty" \
             "post post post"
 
-        grid-template-columns 1fr 0.1fr 1fr
+        grid-template-columns 1fr 0fr 1fr
         grid-template-rows auto
+        grid-gap 2rem
 
     .input
         display flex
         flex-direction column
 
         padding 1 rem
-        margin-bottom 2rem
         background-color #e0e0e0
         border-radius 10px
 
@@ -169,10 +170,9 @@ export default Vue.extend({
         grid-area description
 
     #toggle
-        margin-bottom 2rem
         grid-area toggle
 
-    #post
+    .post
         grid-area post
         font-size 1.5 rem
         background-color #ff5151
