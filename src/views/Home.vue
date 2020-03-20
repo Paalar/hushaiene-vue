@@ -13,7 +13,6 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
 import { mapState } from 'vuex';
 import firebaseFunctions from '@/firebase/functions';
 import store from '@/store';
@@ -24,7 +23,7 @@ import PostInterface from '@/interfaces/post';
 
 firebaseFunctions.fetchAllPosts();
 
-export default Vue.extend({
+export default {
     name: 'Home',
     components: {
         Page,
@@ -37,14 +36,14 @@ export default Vue.extend({
         name: store.getters.userDisplayName,
         isLoggedIn: store.getters.isLoggedIn,
     }),
-});
+};
 </script>
 
-<style lang="stylus">
-    .page
-        display flex
-        flex-direction column
+<style lang="sass" scoped>
+.page
+    display: flex
+    flex-direction: column
 
-    .posts
-        margin-bottom 1.5rem
+.posts
+    margin-bottom: 1.5rem
 </style>

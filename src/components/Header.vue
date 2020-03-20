@@ -103,34 +103,35 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
-    header
-        background-color #ff5151
-        display grid
-        grid-template-columns repeat(9, auto)
+<style lang="sass" scoped>
+@import '@/assets/css/common.sass'
 
-        button
-            grid-column 10
-            margin auto
+header
+    background-color: $red-main
+    display: grid
+    grid-template-columns: repeat(9, auto)
 
-    #title
-        font-size 2.7 em
-        margin-left 0.2 em
-        grid-column 1 / span 2
+    button
+        grid-column: 10
+        margin: auto
 
-    #newPost
-        grid-column 6
+#title
+    font-size: 2.7em
+    margin-left: 0.2em
+    grid-column: 1 / span 2
 
-    #landlord
-        grid-column 5
+#newPost
+    grid-column: 6
 
-    .subTitle
-        margin auto
-        font-size 2 em
-        font-weight 100
+#landlord
+    grid-column: 5
 
-    .activePage
-        border-bottom-style solid
-        border-bottom-color white
+.subTitle
+    margin: auto
+    font-size: 2em
+    font-weight: 100
 
+.activePage
+    border-bottom-style: solid
+    border-bottom-color: white
 </style>

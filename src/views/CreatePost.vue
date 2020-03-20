@@ -1,7 +1,7 @@
 <template>
     <page>
         <card>
-            <h1>Nytt innlegg</h1>
+            <h1 class="cardTitle">Nytt innlegg</h1>
             <form v-on:submit.prevent="post">
                 <div class="input" id="name">
                     <label><b>UTLEIER</b></label>
@@ -60,7 +60,6 @@
 
 <script lang="ts">
 import moment from 'moment';
-import Vue from 'vue';
 import store from '@/store';
 import router from '@/router';
 import firebase from '@/firebase';
@@ -69,7 +68,7 @@ import Card from '@/components/Card.vue';
 
 const cities = ['Oslo', 'Bergen', 'Trondheim'];
 
-export default Vue.extend({
+export default {
     name: 'CreatePost',
     components: {
         Page,
@@ -116,97 +115,95 @@ export default Vue.extend({
             });
         },
     },
-});
+};
+// For grid-template-areas
+/* eslint-disable max-len */
 </script>
 
-<style lang="stylus">
-    .page
-        align-self center
-    form
-        display grid
-        grid-template-areas \
-            "name name name" \
-            "address spacing city" \
-            "description description description" \
-            "toggle empty empty" \
-            "post post post"
+<style lang="sass" scoped>
+@import '@/assets/css/common.sass'
 
-        grid-template-columns 1fr 0fr 1fr
-        grid-template-rows auto
-        grid-gap 2rem
+label
+    padding: 1rem 1rem 0 1rem
+    font-weight: 700
 
-    .input
-        display flex
-        flex-direction column
+.page
+    align-self: center
+form
+    display: grid
+    grid-template-areas: "name name name" "address spacing city" "description description description" "toggle toggle empty" "post post post"
 
-        padding 1 rem
-        background-color #e0e0e0
-        border-radius 10px
+    grid-template-columns: 1fr 0fr 1fr
+    grid-template-rows: auto
+    grid-gap: 2rem
 
-        label
-            font-size 0.9 rem
-            text-decoration underline
+.input
+    display: flex
+    flex-direction: column
 
-        input, select, textarea
-            font-size 1.5 rem
-            padding 0.7rem 0rem
-            background-color #e0e0e0
-            border none
+    padding: 0 1rem
+    background-color: $input-gray
+    border-radius: 10px
 
-        textarea
-            resize none
-            height 20rem
+    input, select, textarea
+        padding: 1rem
+        background-color: $input-gray
 
-    #name
-        grid-area name
+    textarea
+        resize: none
+        height: 20rem
 
-    #address
-        grid-area address
+#name
+    grid-area: name
 
-    #city
-        grid-area city
+#address
+    grid-area: address
 
-    #description
-        grid-area description
+#city
+    grid-area: city
 
-    #toggle
-        grid-area toggle
+#description
+    grid-area: description
 
-    .post
-        grid-area post
-        font-size 1.5 rem
-        background-color #ff5151
-        padding 1.3rem 1rem
-        border none
-        border-radius 25px
+#toggle
+    grid-area: toggle
+    label
+        padding: 0
 
-    .buttonDisabled
-        background-color #f7f7f7
+.post
+    grid-area: post
+    font-size: 1.5rem
+    background-color: $red-main
+    padding: 1.3rem 1rem
+    border-radius: 25px
 
-    .switch
-        margin-left 2rem
-        vertical-align middle
-        -webkit-appearance none
-        height 1.9rem
-        width 3.5rem
-        background-color #e0e0e0
-        border-radius 43px
-        position relative
-        cursor pointer
+.buttonDisabled
+    background-color: $background-gray
+
+.switch
+    margin-left: 2rem
+    vertical-align: middle
+    -webkit-appearance: none
+    height: 1.9rem
+    width: 3.5rem
+    background-color: $input-gray
+    border-radius: 43px
+    position: relative
+    cursor: pointer
+    &:after
+        left: 0.3rem
+        top: 0.2rem
+        content: ''
+        width: 1.5rem
+        height: 1.5rem
+        background-color: #fff
+        position: absolute
+        border-radius: 100%
+        transition: 0.2s
+    &:checked
+        background-color: $red-main
         &:after
-            left 0.3rem
-            top 0.2rem
-            content ''
-            width 1.5rem
-            height 1.5rem
-            background-color #fff
-            position absolute
-            border-radius 100%
-            transition 0.2s
-        &:checked
-            background-color #ff5151
-            &:after
-                transform translateX(1.5rem)
-        &:focus
-            outline-color transparent
+            transform: translateX(1.5rem)
+    &:focus
+        outline-color: transparent
 </style>

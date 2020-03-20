@@ -2,7 +2,7 @@
     <page>
         <card>
             <div class="login">
-                <div class="loginInfo">
+                <div class="cardTitle">
                     <h1>Logg inn</h1>
                 </div>
                 <google-login/>
@@ -68,8 +68,4 @@ export default {
 
 .loginInfo
     margin-bottom: 3rem
-
-h1
-    text-align: center
-    border-bottom: 2px solid $red-main
 </style>
