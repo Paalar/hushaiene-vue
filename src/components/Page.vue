@@ -25,8 +25,11 @@ export default Vue.extend({
 <style lang="stylus">
     .page
         display grid
-        grid-template-areas "header header header" "nav content side" "footer footer footer"
-        grid-template-columns 1fr 1fr 1fr
+        grid-template-areas \
+            "header header header" \
+            "nav content side" \
+            "footer footer footer"
+        grid-template-columns 1fr 2fr 1fr
         grid-template-rows auto 1fr auto
         height 100vh
 
