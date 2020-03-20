@@ -22,15 +22,24 @@ export default {
 
 .button
     border-radius: 25px
-    height: 25px
-    width: 75px
+    height: 30px
+    width: 85px
     text-align: center
+    font-weight: 700
 
 .white
     background-color: #fff
     color: $red-main
+    &:hover
+        color: #fff
+        background-color: $red-main
+        border: 1px solid #fff
 
 .red
     background-color: $red-main
     color: #fff
+    &:hover
+        color: $red-main
+        background-color: #fff
+        border: 1px solid $red-main
 </style>
