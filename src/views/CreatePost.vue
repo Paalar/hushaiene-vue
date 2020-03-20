@@ -42,10 +42,7 @@
                     </textarea>
                 </div>
 
-                <div id="toggle">
-                    <label><b>Post innlegget anonymt</b></label>
-                    <input class="switch" v-model="anonymous" type="checkbox">
-                </div>
+                <Toggle id="toggle" v-model="anonymous"/>
 
                 <button
                     :disabled="disabled"
@@ -65,6 +62,7 @@ import router from '@/router';
 import firebase from '@/firebase';
 import Page from '@/components/Page.vue';
 import Card from '@/components/Card.vue';
+import Toggle from '@/components/form/Toggle.vue';
 
 const cities = ['Oslo', 'Bergen', 'Trondheim'];
 
@@ -73,6 +71,7 @@ export default {
     components: {
         Page,
         Card,
+        Toggle,
     },
     data: () => ({
         name: '',
@@ -132,7 +131,6 @@ label
 form
     display: grid
     grid-template-areas: "name name name" "address spacing city" "description description description" "toggle toggle empty" "post post post"
-
     grid-template-columns: 1fr 0fr 1fr
     grid-template-rows: auto
     grid-gap: 2rem
@@ -179,31 +177,4 @@ form
 
 .buttonDisabled
     background-color: $background-gray
-
-.switch
-    margin-left: 2rem
-    vertical-align: middle
-    -webkit-appearance: none
-    height: 1.9rem
-    width: 3.5rem
-    background-color: $input-gray
-    border-radius: 43px
-    position: relative
-    cursor: pointer
-    &:after
-        left: 0.3rem
-        top: 0.2rem
-        content: ''
-        width: 1.5rem
-        height: 1.5rem
-        background-color: #fff
-        position: absolute
-        border-radius: 100%
-        transition: 0.2s
-    &:checked
-        background-color: $red-main
-        &:after
-            transform: translateX(1.5rem)
-    &:focus
-        outline-color: transparent
 </style>
