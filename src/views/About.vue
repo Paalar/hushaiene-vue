@@ -1,27 +1,23 @@
 <template>
     <div>
         <nav-header/>
-        <page-content>
+        <page>
             <div class="about">
                 <h1>This is an about page</h1>
             </div>
-        </page-content>
+        </page>
         <page-footer/>
     </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import PageContent from '@/components/PageContent.vue';
-import Header from '@/components/Header.vue';
-import Footer from '@/components/Footer.vue';
+import Page from '@/components/Page.vue';
 
 export default Vue.extend({
     name: 'About',
     components: {
-        'nav-header': Header,
-        'page-content': PageContent,
-        'page-footer': Footer,
+        Page,
     },
 });
 </script>
