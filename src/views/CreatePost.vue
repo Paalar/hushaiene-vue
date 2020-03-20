@@ -1,7 +1,7 @@
 <template>
     <page>
         <card>
-            <h1>Nytt innlegg </h1>
+            <h1>Nytt innlegg</h1>
             <form v-on:submit.prevent="post">
                 <div class="input" id="name">
                     <label><b>UTLEIER</b></label>

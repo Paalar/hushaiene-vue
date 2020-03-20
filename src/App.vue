@@ -16,20 +16,24 @@ if (user === undefined) {
     }
 }
 
-export default {
-
-};
+export default {};
 </script>
 
-<style lang='stylus'>
-@font-face {
-    font-family: 'Open Sans';
-    src: url('./assets/fonts/Open_Sans/OpenSans-Regular.ttf');
-}
+<style lang='sass'>
+@import '@/assets/css/reset.sass'
+@import '@/assets/css/baseline.sass'
+@import '@/assets/css/common.sass'
+
+@font-face
+    font-family: 'Open Sans'
+    src: url('./assets/fonts/Open_Sans/OpenSans-Regular.ttf')
 
 #app
-    font-family 'Open Sans'
+    font-family: 'Open Sans'
 body
-    margin 0
-    background-color #f7f7f7
+    margin: 0
+    background-color: $background-gray
+
+html
+    overflow-y: scroll
 </style>

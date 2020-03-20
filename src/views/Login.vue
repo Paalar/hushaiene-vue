@@ -60,5 +60,16 @@ export default Vue.extend({
     mounted() {
         this.redirectGoogle();
     },
-});
+};
 </script>
+
+<style lang="sass" scoped>
+@import '@/assets/css/common.sass'
+
+.loginInfo
+    margin-bottom: 3rem
+
+h1
+    text-align: center
+    border-bottom: 2px solid $red-main
+</style>
