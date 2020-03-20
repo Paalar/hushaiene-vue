@@ -26,10 +26,10 @@ import Page from '@/components/Page.vue';
 // eslint-disable-next-line no-unused-vars
 import PostInterface from '@/interfaces/post';
 
-const posts: PostInterface[] = [];
 firebase.postsCollection
     .orderBy('created', 'desc')
     .onSnapshot(async (snapshot) => {
+        const posts: PostInterface[] = [];
         snapshot.forEach((document) => {
             const data = document.data();
             const post = {
@@ -38,7 +38,6 @@ firebase.postsCollection
             };
             posts.push(post);
         });
-        console.log(posts);
         store.dispatch('setPosts', posts);
     });
 

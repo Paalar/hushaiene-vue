@@ -52,8 +52,8 @@ export default new Vuex.Store({
             await window.localStorage.setItem('token', token);
             state.token = token;
         },
-        setPosts: async (state, posts) => {
-            state.posts = posts;
+        setPosts: async (state, newPosts) => {
+            state.posts = [...newPosts];
         },
     },
     actions: {
@@ -66,8 +66,8 @@ export default new Vuex.Store({
         setToken: async ({ commit }, token) => {
             await commit('setToken', token);
         },
-        setPosts: ({ commit }, posts) => {
-            commit('setPosts', posts);
+        setPosts: ({ commit }, newPosts) => {
+            commit('setPosts', newPosts);
         },
     },
     modules: {
