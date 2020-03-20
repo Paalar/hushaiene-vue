@@ -1,29 +1,23 @@
 <template>
     <div>
-        <nav-header/>
-        <page-content>
+        <page>
             <div class="home">
                 <h1>Home</h1>
                 <p v-if="isLoggedIn">Welcome, {{ name }}</p>
             </div>
-        </page-content>
-        <page-footer/>
+        </page>
     </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import store from '@/store';
-import PageContent from '@/components/PageContent.vue';
-import Header from '@/components/Header.vue';
-import Footer from '@/components/Footer.vue';
+import Page from '@/components/Page.vue';
 
 export default Vue.extend({
     name: 'Home',
     components: {
-        'page-content': PageContent,
-        'nav-header': Header,
-        'page-footer': Footer,
+        Page,
     },
     data: () => ({
         name: store.getters.userDisplayName,
