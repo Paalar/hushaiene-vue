@@ -19,21 +19,25 @@ const routes = [
         name: 'Home',
         component: Home,
     },
+    /*
     {
         path: '/om',
         name: 'About',
         component: About,
     },
+    */
     {
         path: '/login',
         name: 'Login',
         component: Login,
     },
+    /*
     {
         path: '/lover',
         name: 'Regulations',
         component: Regulations,
     },
+    */
     {
         path: '/nytt-innlegg',
         name: 'CreatePost',
