@@ -37,6 +37,8 @@ export default Vue.extend({
         grid-area header
     .page
         grid-area content
+        margin-top 2rem
+        margin-bottom 2.5rem
     footer
         grid-area footer
 </style>

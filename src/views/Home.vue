@@ -1,19 +1,15 @@
 <template>
-    <div>
-        <page>
-            <div class="home">
-                <h1>Home</h1>
-                <p v-if="isLoggedIn">Welcome, {{ name }}</p>
-            </div>
-            <div id="posts">
-                <ul>
-                    <li v-for="post in posts" :key="post.userId">
-                        {{ post }}
-                    </li>
-                </ul>
-            </div>
-        </page>
-    </div>
+    <page>
+        <card
+            class="posts"
+            v-for="post in posts"
+            :key="post.id"
+        >
+            <ol v-for="(value, name) in post" :key="value">
+                {{name }} : {{ value }}
+            </ol>
+        </card>
+    </page>
 </template>
 
 <script lang="ts">
@@ -22,6 +18,7 @@ import { mapState } from 'vuex';
 import firebase from '@/firebase';
 import store from '@/store';
 import Page from '@/components/Page.vue';
+import Card from '@/components/Card.vue';
 // TODO what is even happenign here
 // eslint-disable-next-line no-unused-vars
 import PostInterface from '@/interfaces/post';
@@ -45,6 +42,7 @@ export default Vue.extend({
     name: 'Home',
     components: {
         Page,
+        Card,
     },
     computed: {
         ...mapState(['posts']),
@@ -59,3 +57,12 @@ export default Vue.extend({
     },
 });
 </script>
+
+<style lang="stylus">
+    .page
+        display flex
+        flex-direction column
+
+    .posts
+        margin 1rem 0
+</style>
