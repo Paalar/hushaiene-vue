@@ -67,6 +67,26 @@ export default Vue.extend({
     data: () => ({
         isLoggedIn: store.getters.isLoggedIn,
         isActive: window.location.pathname,
+        about: {
+            path: '/om',
+            name: 'About',
+        },
+        regulations: {
+            path: '/lover',
+            name: 'Regulations',
+        },
+        createPost: {
+            path: '/nytt-innlegg',
+            name: 'CreatePost',
+        },
+        home: {
+            path: '/',
+            name: 'Home',
+        },
+        login: {
+            path: '/login',
+            name: 'Login',
+        },
     }),
 });
 </script>
@@ -75,7 +95,7 @@ export default Vue.extend({
     header
         background-color #ff5151
         display grid
-        grid-template-columns 15% 25% 25% 25%  10%
+        grid-template-columns 15% repeat(4, auto) 10%
 
     #title
         font-size 2.7 em

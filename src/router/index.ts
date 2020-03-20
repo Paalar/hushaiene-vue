@@ -4,6 +4,7 @@ import Home from '@/views/Home.vue';
 import About from '@/views/About.vue';
 import Login from '@/views/Login.vue';
 import Regulations from '@/views/Regulations.vue';
+import CreatePost from '@/views/CreatePost.vue';
 
 Vue.use(VueRouter);
 
@@ -34,6 +35,11 @@ const routes = [
         path: '/lover',
         name: 'Regulations',
         component: Regulations,
+    },
+    {
+        path: '/nytt-innlegg',
+        name: 'CreatePost',
+        component: CreatePost,
     },
 ];
 
