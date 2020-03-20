@@ -120,6 +120,7 @@ export default Vue.extend({
 
         label
             font-size 0.9 rem
+            text-decoration underline
 
         input, select, textarea
             font-size 1.5 rem
