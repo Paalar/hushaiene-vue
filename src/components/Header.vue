@@ -5,6 +5,7 @@
             v-bind:class="['subTitle', {'activePage' : isActive === home.path}]"
             v-on:click="pushLocation(home.name, home.path)"
             >Utleiere</h3>
+        <!--
         <h3
             v-bind:class="['subTitle', {'activePage' : isActive === regulations.path}]"
             v-on:click="pushLocation(regulations.name, regulations.path)"
@@ -14,6 +15,7 @@
             v-on:click="pushLocation(about.name, about.path)"
             class="subTitle"
             >Om siden</h3>
+        -->
         <h3
             v-bind:class="['subTitle', {'activePage' : isActive === createPost.path}]"
             v-on:click="pushLocation(createPost.name, createPost.path)"

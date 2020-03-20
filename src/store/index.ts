@@ -1,19 +1,22 @@
 /* eslint-disable no-param-reassign */
 import Vue from 'vue';
 import Vuex from 'vuex';
+import PostInterface from '@/interfaces/post';
 // import types from './types';
 
 Vue.use(Vuex);
 
 interface storeState {
     user?: Object,
-    token?: String
+    token?: String,
+    posts: PostInterface[]
 }
 
 export default new Vuex.Store({
     state: {
         user: undefined,
         token: undefined,
+        posts: [],
     } as storeState,
     getters: {
         isLoggedIn: (state) => state.user != null,
@@ -32,6 +35,7 @@ export default new Vuex.Store({
             return undefined;
         },
         localStorageToken: (state) => window.localStorage.getItem('token'),
+        posts: (state) => state.posts,
     },
     mutations: {
         signIn: async (state, user) => {
@@ -48,6 +52,9 @@ export default new Vuex.Store({
             await window.localStorage.setItem('token', token);
             state.token = token;
         },
+        setPosts: async (state, newPosts) => {
+            state.posts = [...newPosts];
+        },
     },
     actions: {
         signIn: async ({ commit }, user) => {
@@ -58,6 +65,9 @@ export default new Vuex.Store({
         },
         setToken: async ({ commit }, token) => {
             await commit('setToken', token);
+        },
+        setPosts: ({ commit }, newPosts) => {
+            commit('setPosts', newPosts);
         },
     },
     modules: {

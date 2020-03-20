@@ -1,8 +1,8 @@
 <template>
-    <div class="page">
+    <div class="pageContainer">
         <nav-header />
-        <div class="pageContent">
-            <slot></slot>
+        <div class="page">
+            <slot class="pageContent"></slot>
         </div>
         <page-footer />
     </div>
@@ -10,8 +10,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import Header from '@/components/Header.vue';
+import Footer from '@/components/Footer.vue';
 
 export default Vue.extend({
     name: 'Page',
@@ -23,7 +23,7 @@ export default Vue.extend({
 </script>
 
 <style lang="stylus">
-    .page
+    .pageContainer
         display grid
         grid-template-areas \
             "header header header" \
@@ -35,8 +35,10 @@ export default Vue.extend({
 
     header
         grid-area header
-    .pageContent
+    .page
         grid-area content
+        margin-top 2rem
+        margin-bottom 2.5rem
     footer
         grid-area footer
 </style>

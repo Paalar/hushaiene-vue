@@ -2,7 +2,7 @@
     <page>
         <card>
             <h1>Nytt innlegg </h1>
-            <form>
+            <form v-on:submit.prevent="post">
                 <div class="input" id="name">
                     <label><b>UTLEIER</b></label>
                     <input
@@ -49,8 +49,7 @@
 
                 <button
                     :disabled="disabled"
-                    v-bind:class="{'buttonDisabled' : disabled}"
-                    id="post"
+                    :class="['post', {'buttonDisabled' : disabled}]"
                     type="submit">
                     Send inn
                 </button>
@@ -60,7 +59,11 @@
 </template>
 
 <script lang="ts">
+import moment from 'moment';
 import Vue from 'vue';
+import store from '@/store';
+import router from '@/router';
+import firebase from '@/firebase';
 import Page from '@/components/Page.vue';
 import Card from '@/components/Card.vue';
 
@@ -92,11 +95,33 @@ export default Vue.extend({
                 this.disabled = true;
             }
         },
+        post() {
+            firebase.postsCollection.add({
+                created: moment().format(),
+                likes: 0,
+                comments: 0,
+                userId: store.getters.user.uid,
+                userName: store.getters.user.displayName,
+                landlord: this.name,
+                city: this.city,
+                address: this.address,
+                description: this.description,
+                isAnonymous: this.anonymous,
+            }).then((result) => {
+                console.log(result);
+                router.push('/');
+            }).catch((error) => {
+                // TODO better error handling
+                console.log(error);
+            });
+        },
     },
 });
 </script>
 
 <style lang="stylus">
+    .page
+        align-self center
     form
         display grid
         grid-template-areas \
@@ -106,20 +131,21 @@ export default Vue.extend({
             "toggle empty empty" \
             "post post post"
 
-        grid-template-columns 1fr 0.1fr 1fr
+        grid-template-columns 1fr 0fr 1fr
         grid-template-rows auto
+        grid-gap 2rem
 
     .input
         display flex
         flex-direction column
 
         padding 1 rem
-        margin-bottom 2rem
         background-color #e0e0e0
         border-radius 10px
 
         label
             font-size 0.9 rem
+            text-decoration underline
 
         input, select, textarea
             font-size 1.5 rem
@@ -144,10 +170,9 @@ export default Vue.extend({
         grid-area description
 
     #toggle
-        margin-bottom 2rem
         grid-area toggle
 
-    #post
+    .post
         grid-area post
         font-size 1.5 rem
         background-color #ff5151
