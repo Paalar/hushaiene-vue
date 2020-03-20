@@ -24,13 +24,15 @@ button
     color: #fff
     background: $google-blue
     margin: auto
-    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75)
-    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75)
-    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75)
     padding-right: 1rem
-    border: 1px solid $google-blue
     font-weight: 500
     font-size: 16px
+    border: 1px solid $google-blue
+    &:hover
+        transition: all 0.2s linear
+        -webkit-box-shadow: 0px 0px 5px 0px $google-blue
+        -moz-box-shadow: 0px 0px 5px 0px $google-blue
+        box-shadow: 0px 0px 5px 0px $google-blue
 
 img
     background: white
