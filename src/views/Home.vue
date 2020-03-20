@@ -64,5 +64,5 @@ export default Vue.extend({
         flex-direction column
 
     .posts
-        margin 1rem 0
+        margin-bottom 1.5rem
 </style>
