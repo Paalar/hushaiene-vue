@@ -2,8 +2,9 @@
     <header>
         <h1 id="title">Hushaiene</h1>
         <h3
-            v-bind:class="['subTitle', {'activePage' : isActive === home.path}]"
-            v-on:click="pushLocation(home.name, home.path)"
+            id="landlord"
+            :class="['subTitle', {'activePage' : isActive === home.path}]"
+            @click="pushLocation(home.name, home.path)"
             >Utleiere</h3>
         <!--
         <h3
@@ -17,14 +18,26 @@
             >Om siden</h3>
         -->
         <h3
-            v-bind:class="['subTitle', {'activePage' : isActive === createPost.path}]"
-            v-on:click="pushLocation(createPost.name, createPost.path)"
+            id="newPost"
+            v-if="isLoggedIn"
             class="subTitle"
+            :class="['subTitle', {'activePage' : isActive === createPost.path}]"
+            @click="pushLocation(createPost.name, createPost.path)"
             >Nytt Innlegg</h3>
-        <button v-if="!isLoggedIn" v-on:click="pushLocation(login.name, login.path)">
-            Logg inn
-        </button>
-        <button v-else v-on:click="signOut">Logg ut</button>
+        <f-button
+            id=".sign"
+            v-if="!isLoggedIn"
+            @on-click="goLogin"
+            :type="'white'"
+            :text="'Logg inn'"
+        />
+        <f-button
+            v-else
+            id=".sign"
+            @on-click="signOut"
+            :type="'white'"
+            :text="'Logg ut'"
+        />
     </header>
 </template>
 
@@ -33,25 +46,33 @@ import Vue from 'vue';
 import firebase from 'firebase';
 import store from '@/store';
 import router from '@/router';
+import Button from '@/components/form/Button.vue';
 
 export default Vue.extend({
+    components: {
+        'f-button': Button,
+    },
     methods: {
-        pushLocation: (componentName: string, path: string) => {
+        pushLocation(componentName: string, path: string) {
             const currentComponent = router.currentRoute.name;
             if (currentComponent !== componentName) {
                 router.push(path);
             }
         },
-        signOut: () => {
+        goLogin() {
+            console.log('loggin');
+            this.pushLocation('Login', '/login');
+        },
+        signOut() {
             firebase.auth().signOut().then(async () => {
                 // Sign out successfull
                 await store.dispatch('signOut');
                 window.location.reload();
             }).catch((error) => {
                 console.log(error);
+                // sign out unsuccessfull
                 // TODO better error handling
                 window.alert('Kunne ikke logge ut');
-                // sign out unsuccessfull
             });
         },
     },
@@ -82,21 +103,34 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
     header
         background-color #ff5151
         display grid
-        grid-template-columns 15% repeat(4, auto) 10%
+        grid-template-columns repeat(9, auto)
+
+        button
+            grid-column 10
+            margin auto
 
     #title
         font-size 2.7 em
         margin-left 0.2 em
+        grid-column 1 / span 2
+
+    #newPost
+        grid-column 6
+
+    #landlord
+        grid-column 5
 
     .subTitle
         margin auto
         font-size 2 em
         font-weight 100
+
     .activePage
         border-bottom-style solid
         border-bottom-color white
+
 </style>
