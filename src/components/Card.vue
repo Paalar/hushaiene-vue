@@ -23,5 +23,4 @@ export default Vue.extend({
         background-color white
         border-radius 15px
         padding 3rem 3rem 3rem 3rem
-        margin-top 1 rem
 </style>
