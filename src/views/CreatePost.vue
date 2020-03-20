@@ -2,7 +2,7 @@
     <page>
         <card>
             <h1>Nytt innlegg </h1>
-            <form @submit="post">
+            <form v-on:submit.prevent="post">
                 <div class="input" id="name">
                     <label><b>UTLEIER</b></label>
                     <input
@@ -96,8 +96,7 @@ export default Vue.extend({
                 this.disabled = true;
             }
         },
-        post(event: Event) {
-            event.preventDefault();
+        post() {
             firebase.postsCollection.add({
                 created: moment().format(),
                 likes: 0,
