@@ -21,9 +21,13 @@ export default {
             },
         },
         color: {
-            type: String,
-            validator(value) {
-                return ['red', 'white'].indexOf(value) !== -1;
+            validator(value: string) {
+                const validColors = ['red', 'white'];
+                const isValid = validColors.includes(value);
+                if (!isValid) {
+                    throw new Error(`Color must be one of [${validColors.join(', ')}]`);
+                }
+                return isValid;
             },
         },
         text: String,

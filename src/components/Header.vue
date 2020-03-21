@@ -28,7 +28,7 @@
             id=".sign"
             v-if="!isLoggedIn"
             @on-click="goLogin"
-            :type="'white'"
+            :color="'white'"
             :text="'Logg inn'"
         />
         <f-button
@@ -60,7 +60,6 @@ export default Vue.extend({
             }
         },
         goLogin() {
-            console.log('loggin');
             this.pushLocation('Login', '/login');
         },
         signOut() {
