@@ -3,7 +3,7 @@
         <label v-if="hasLabel"><b>{{ label }}</b></label>
         <textarea
             wrap="hard"
-            placeholder="placeholder"
+            :placeholder="placeholder"
             :value="value"
             @input="$emit('input', $event.target.value)"
         />

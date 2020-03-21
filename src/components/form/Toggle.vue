@@ -27,7 +27,7 @@ export default {
     -webkit-appearance: none
     height: 1.9rem
     width: 3.5rem
-    background-color: $input-gray
+    background-color: $disabled-gray
     border-radius: 43px
     position: relative
     cursor: pointer

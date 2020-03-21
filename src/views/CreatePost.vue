@@ -40,6 +40,7 @@
                     :text="'Send inn'"
                     :color="'red'"
                     :buttonType="'submit'"
+                    :disabled="disabled"
                 />
             </form>
         </card>

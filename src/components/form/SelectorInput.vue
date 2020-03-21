@@ -81,6 +81,8 @@ $arrow-width: 10%
             content: $arrow-down
     &.open
         background-color: $disabled-gray
+        border-top-left-radius: 5px
+        border-top-right-radius: 5px
         &:after
             width: $arrow-width
             content: $arrow-up
