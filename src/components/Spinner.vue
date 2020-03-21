@@ -1,10 +1,21 @@
 <template>
-    <div class="spinner">
+    <div :class="['spinner', {'inverted' : inverted, 'hidden' : hide }]">
     </div>
 </template>
 
 <script lang="ts">
-export default { };
+export default {
+    props: {
+        hide: {
+            type: Boolean,
+            default: false,
+        },
+        inverted: {
+            type: Boolean,
+            default: false,
+        },
+    },
+};
 </script>
 
 <style lang="sass" scoped>
@@ -17,7 +28,14 @@ export default { };
     border-top-color: $red-main
     border-radius: 100px
 
-    // Spinning animation
+.inverted
+    border-color: transparent
+    border-top: 12px solid $red-main
+
+.hidden
+    display: none
+
+// Spinning animation
 .spinner
     -webkit-transition-property: -webkit-transform
     -webkit-transition-duration: 1.2s
