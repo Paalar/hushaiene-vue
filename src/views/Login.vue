@@ -12,12 +12,10 @@
 </template>
 
 <script lang="ts">
-import store from '@/store';
-import firebase from 'firebase';
-import router from '@/router';
 import Page from '@/components/Page.vue';
 import Card from '@/components/Card.vue';
 import GoogleLogin from '@/components/form/GoogleLogin.vue';
+import { getRedirectFromGoogle } from '@/firebase/functions';
 
 export default {
     name: 'Login',
@@ -26,39 +24,8 @@ export default {
         Card,
         GoogleLogin,
     },
-    methods: {
-        redirectGoogle: () => {
-            if (store.getters.isLoggedIn) {
-                router.push('/');
-            }
-            firebase.auth().getRedirectResult().then(async (result) => {
-                if (result.credential) {
-                    const OAuth = result.credential;
-                    const { accessToken } = OAuth; // TODO cast to oauth to remove error
-                    store.dispatch('setToken', accessToken);
-                }
-                const { user } = result;
-                if (user !== null) {
-                    await store.dispatch('signIn', user);
-                    router.push('/');
-                }
-            }).catch((error) => {
-                // TODO better error handling
-                window.alert('Kunne ikke logge inn');
-                console.log(error);
-                // Handle Errors here.
-                // const errorCode = error.code;
-                // const errorMessage = error.message;
-                // The email of the user's account used.
-                // const email = error.email;
-                // The firebase.auth.AuthCredential type that was used.
-                // const credential = error.credential;
-                // ...
-            });
-        },
-    },
     mounted() {
-        this.redirectGoogle();
+        getRedirectFromGoogle();
     },
 };
 </script>
