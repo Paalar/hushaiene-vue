@@ -20,7 +20,7 @@
                 <selector-input
                     id="city"
                     v-model="city"
-                    :cities="cities"
+                    :items="cities"
                     :disabled="'Velg en by'"
                     :label="'BY'"
                 />
