@@ -35,7 +35,7 @@
             v-else
             id=".sign"
             @on-click="signOut"
-            :type="'white'"
+            :color="'white'"
             :text="'Logg ut'"
         />
     </header>
