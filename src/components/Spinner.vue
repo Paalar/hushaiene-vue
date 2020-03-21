@@ -1,5 +1,11 @@
 <template>
-    <div :class="['spinner', {'inverted' : inverted, 'hidden' : hide }]">
+    <div
+        :class="[
+            'spinner', {
+            'inverted' : inverted,
+            'hidden' : hide,
+            'removed' : remove
+            }]">
     </div>
 </template>
 
@@ -11,6 +17,10 @@ export default {
             default: false,
         },
         inverted: {
+            type: Boolean,
+            default: false,
+        },
+        remove: {
             type: Boolean,
             default: false,
         },
@@ -32,8 +42,11 @@ export default {
     border-color: transparent
     border-top: 12px solid $red-main
 
-.hidden
+.removed
     display: none
+
+.hidden
+    visibility: hidden
 
 // Spinning animation
 .spinner
