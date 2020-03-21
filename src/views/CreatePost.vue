@@ -157,6 +157,7 @@ form
 
 #toggle
     grid-area: toggle
+    padding-left: 1rem
 
 #sendContainer
     padding: 2rem 0
