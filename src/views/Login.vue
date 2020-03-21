@@ -66,6 +66,6 @@ export default {
 <style lang="sass" scoped>
 @import '@/assets/css/common.sass'
 
-.loginInfo
-    margin-bottom: 3rem
+.login
+    padding-bottom: 5rem
 </style>
