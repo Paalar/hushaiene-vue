@@ -5,8 +5,8 @@
             v-for="post in posts"
             :key="post.id"
         >
-            <ol v-for="(value, name) in post" :key="value">
-                {{name }} : {{ value }}
+            <ol v-for="(value, name, index) in post" :key="index">
+                {{name}} : {{ value }}
             </ol>
         </card>
     </page>
@@ -18,8 +18,6 @@ import firebaseFunctions from '@/firebase/functions';
 import store from '@/store';
 import Page from '@/components/Page.vue';
 import Card from '@/components/Card.vue';
-// eslint-disable-next-line no-unused-vars
-import PostInterface from '@/interfaces/post';
 
 firebaseFunctions.fetchAllPosts();
 

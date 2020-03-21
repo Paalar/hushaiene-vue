@@ -1,12 +1,12 @@
 <template>
     <div class="inputContainer">
         <label v-if="hasLabel"><b>{{ label }}</b></label>
-        <input
-            @input="$emit('input', $event.target.value)"
-            :value="value"
-            type="text"
+        <textarea
+            wrap="hard"
             :placeholder="placeholder"
-        >
+            :value="value"
+            @input="$emit('input', $event.target.value)"
+        />
     </div>
 </template>
 
@@ -24,3 +24,7 @@ export default {
     },
 };
 </script>
+
+<style lang="sass" scoped>
+
+</style>

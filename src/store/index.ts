@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import Vue from 'vue';
 import Vuex from 'vuex';
-import PostInterface from '@/interfaces/post';
+import Post from '@/interfaces/firebase';
 // import types from './types';
 
 Vue.use(Vuex);
@@ -9,7 +9,7 @@ Vue.use(Vuex);
 interface storeState {
     user?: Object,
     token?: String,
-    posts: PostInterface[]
+    posts: Post[]
 }
 
 export default new Vuex.Store({

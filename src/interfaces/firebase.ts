@@ -1,4 +1,4 @@
-interface Post {
+export interface Post {
     created: string,
     likes: number,
     comments: number,
@@ -12,4 +12,10 @@ interface Post {
     userName: string,
 }
 
-export default Post;
+export interface NewPost {
+    landlord: string,
+    city: string,
+    address: string,
+    description: string,
+    isAnonymous: boolean,
+}

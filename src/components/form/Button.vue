@@ -2,8 +2,9 @@
     <button
         class="button"
         @click="$emit('on-click')"
-        :class="color"
+        :class="[color, { 'disabled' : disabled === true }]"
         :type="buttonType"
+        :disabled="disabled"
     >
         {{ text }}
     </button>
@@ -20,9 +21,13 @@ export default {
             },
         },
         color: {
-            type: String,
-            validator(value) {
-                return ['red', 'white'].indexOf(value) !== -1;
+            validator(value: string) {
+                const validColors = ['red', 'white'];
+                const isValid = validColors.includes(value);
+                if (!isValid) {
+                    throw new Error(`Color must be one of [${validColors.join(', ')}]`);
+                }
+                return isValid;
             },
         },
         text: String,
@@ -37,31 +42,38 @@ export default {
 <style lang="sass" scoped>
 @import '@/assets/css/common.sass'
 
+$button-border-white: 2px solid #fff
+$button-border-red: 2px solid $red-main
 .button
     border-radius: 100px
     height: 30px
     width: 85px
     text-align: center
     font-weight: 700
-    :disabled
-        background-color: $background-gray
-        color: #000
+    &:disabled
+        background-color: #e0e0e0
+        color: $input-gray
+        border-color: #e0e0e0
+        &:hover
+            border-color: #e0e0e0
+            background-color: #e0e0e0
+            color: $input-gray
 
 .white
     background-color: #fff
     color: $red-main
-    border: 1px solid #fff
+    border: $button-border-white
     &:hover
         color: #fff
         background-color: $red-main
-        border: 1px solid #fff
+
 
 .red
     background-color: $red-main
     color: #fff
-    border: 1px solid $red-main
+    border: $button-border-red
     &:hover
         color: $red-main
         background-color: #fff
-        border: 1px solid $red-main
+        border: $button-border-red
 </style>
