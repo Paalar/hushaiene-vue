@@ -1,5 +1,6 @@
 import moment from 'moment';
 import store from '@/store';
+import router from '@/router';
 import firebase from 'firebase';
 import firebaseConfig from '@/firebase';
 import { Post, NewPost } from '@/interfaces/firebase';
@@ -35,6 +36,36 @@ export const createNewPostPromise = (postData: NewPost) => (
 );
 
 export const signInWithGoogle = () => firebase.auth().signInWithRedirect(googleProvider);
+
+export const getRedirectFromGoogle = () => {
+    if (store.getters.isLoggedIn) {
+        router.push('/');
+    }
+    firebase.auth().getRedirectResult().then(async (result) => {
+        if (result.credential) {
+            const OAuth = result.credential;
+            const { accessToken } = OAuth; // TODO cast to oauth to remove error
+            store.dispatch('setToken', accessToken);
+        }
+        const { user } = result;
+        if (user !== null) {
+            await store.dispatch('signIn', user);
+            router.push('/');
+        }
+    }).catch((error) => {
+        // TODO better error handling
+        window.alert('Kunne ikke logge inn');
+        console.log(error);
+        // Handle Errors here.
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
+        // The email of the user's account used.
+        // const email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        // const credential = error.credential;
+        // ...
+    });
+};
 
 export const signOutPromise = () => firebase.auth().signOut();
 

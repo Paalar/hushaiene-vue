@@ -34,14 +34,17 @@
                 />
 
                 <Toggle id="toggle" v-model="isAnonymous"/>
-
-                <f-button
-                    id="post"
-                    :text="'Send inn'"
-                    :color="'red'"
-                    :buttonType="'submit'"
-                    :disabled="disabled"
-                />
+                <div id="sendContainer">
+                    <f-button
+                        id="post"
+                        :class="{ 'hidden' : posting }"
+                        :text="'Send inn'"
+                        :color="'red'"
+                        :buttonType="'submit'"
+                        :disabled="disabled"
+                    />
+                    <spinner :hidden="!posting" />
+                </div>
             </form>
         </card>
     </page>
@@ -57,6 +60,7 @@ import Toggle from '@/components/form/Toggle.vue';
 import SelectorInput from '@/components/form/SelectorInput.vue';
 import TextAreaInput from '@/components/form/TextAreaInput.vue';
 import Button from '@/components/form/Button.vue';
+import Spinner from '@/components/Spinner.vue';
 
 const cities = ['Oslo', 'Bergen', 'Trondheim'];
 
@@ -70,6 +74,7 @@ export default {
         SelectorInput,
         TextAreaInput,
         'f-button': Button,
+        Spinner,
     },
     data: () => ({
         landlord: '',
@@ -79,6 +84,7 @@ export default {
         isAnonymous: false,
         disabled: true,
         cities,
+        posting: false,
     }),
     watch: {
         landlord() { this.isButtonDisabled(); },
@@ -98,6 +104,7 @@ export default {
             }
         },
         post() {
+            this.posting = true;
             const newPost = {
                 landlord: this.landlord,
                 city: this.city,
@@ -105,11 +112,12 @@ export default {
                 description: this.description,
                 isAnonymous: this.isAnonymous,
             };
-            createNewPostPromise(newPost).then((result) => {
-                console.log(result);
+            createNewPostPromise(newPost).then(() => {
                 router.push('/');
             }).catch((error) => {
                 // TODO better error handling
+                this.posting = false;
+                alert('Kunne ikke lage innlegget');
                 console.log(error);
             });
         },
@@ -149,11 +157,23 @@ form
 
 #toggle
     grid-area: toggle
+    padding-left: 1rem
+
+#sendContainer
+    padding: 2rem 0
+    grid-area: post
+    position: relative
+    display: flex
+    justify-content: center
+    align-items: center
+    > *
+        position: absolute
 
 #post
-    grid-area: post
+    width: 100%
     font-size: 1.5rem
-    width: auto
     height: auto
     padding: 1.3rem 1rem
+    &.hidden
+        visibility: hidden
 </style>

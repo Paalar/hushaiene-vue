@@ -2,6 +2,7 @@
     <page>
         <card
             class="posts"
+            :class="{'hidden' : loaded}"
             v-for="post in posts"
             :key="post.id"
         >
@@ -9,6 +10,7 @@
                 {{name}} : {{ value }}
             </ol>
         </card>
+        <spinner class="spinner" :hidden="!loaded" />
     </page>
 </template>
 
@@ -18,6 +20,7 @@ import firebaseFunctions from '@/firebase/functions';
 import store from '@/store';
 import Page from '@/components/Page.vue';
 import Card from '@/components/Card.vue';
+import Spinner from '@/components/Spinner.vue';
 
 firebaseFunctions.fetchAllPosts();
 
@@ -26,9 +29,13 @@ export default {
     components: {
         Page,
         Card,
+        Spinner,
     },
     computed: {
         ...mapState(['posts']),
+        loaded() {
+            return this.posts.length === 0;
+        },
     },
     data: () => ({
         name: store.getters.userDisplayName,
@@ -38,10 +45,16 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.page
-    display: flex
-    flex-direction: column
-
 .posts
     margin-bottom: 1.5rem
+    &.hidden
+        display: none
+
+.spinner
+    margin: auto
+    position: absolute
+    left: 0
+    right: 0
+    bottom: 0
+    top: 0
 </style>

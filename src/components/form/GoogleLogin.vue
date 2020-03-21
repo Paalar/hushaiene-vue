@@ -1,16 +1,31 @@
 <template>
-    <button @click="signInWithGoogle">
-        <img src="@/assets/images/google-logo.svg" />
-        <span>Logg inn med google</span>
-    </button>
+    <div class="loginButton">
+        <button @click="signIn" :class="{ 'hidden' : redirecting }">
+            <img src="@/assets/images/google-logo.svg" />
+            <span>Logg inn med google</span>
+        </button>
+        <spinner :hide="!redirecting"/>
+    </div>
 </template>
 
 <script lang="ts">
+import Spinner from '@/components/Spinner.vue';
 import { signInWithGoogle } from '@/firebase/functions';
 
 export default {
+    data() {
+        return {
+            redirecting: false,
+        };
+    },
+    components: {
+        Spinner,
+    },
     methods: {
-        signInWithGoogle,
+        signIn() {
+            signInWithGoogle();
+            this.$data.redirecting = true;
+        },
     },
 };
 </script>
@@ -33,8 +48,18 @@ button
         -webkit-box-shadow: 0px 0px 5px 0px $google-blue
         -moz-box-shadow: 0px 0px 5px 0px $google-blue
         box-shadow: 0px 0px 5px 0px $google-blue
+    &.hidden
+        display: none
 
 img
     background: white
     margin-right: 1rem
+
+.loginButton
+    position: relative
+    display: flex
+    justify-content: center
+    align-items: bottom
+    > *
+        position: absolute
 </style>
