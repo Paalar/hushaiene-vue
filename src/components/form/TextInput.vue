@@ -1,22 +1,26 @@
 <template>
-    <div class="textInput">
-        <label>{{ label }}</label>
+    <div class="inputContainer">
+        <label v-if="hasLabel"><b>{{ label }}</b></label>
         <input
+            @input="$emit('input', $event.target.value)"
+            :value="value"
             type="text"
-            v-model="name"
+            :placeholder="placeholder"
         >
     </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-
-export default Vue.extend({
+export default {
     props: {
-        name: String,
+        value: String,
         label: String,
-        hint: String,
-        input: String,
+        placeholder: String,
     },
-});
+    methods: {
+        hasLabel() {
+            return this.label.length > 0;
+        },
+    },
+};
 </script>
