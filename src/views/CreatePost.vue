@@ -33,7 +33,7 @@
                     :label="'BESKRIVELSE'"
                 />
 
-                <Toggle id="toggle" v-model="anonymous"/>
+                <Toggle id="toggle" v-model="isAnonymous"/>
 
                 <f-button
                     id="post"
@@ -48,10 +48,8 @@
 </template>
 
 <script lang="ts">
-import moment from 'moment';
-import store from '@/store';
 import router from '@/router';
-import firebase from '@/firebase';
+import { createNewPostPromise } from '@/firebase/functions';
 import Page from '@/components/Page.vue';
 import Card from '@/components/Card.vue';
 import TextInput from '@/components/form/TextInput.vue';
@@ -78,7 +76,7 @@ export default {
         address: '',
         city: '',
         description: '',
-        anonymous: false,
+        isAnonymous: false,
         disabled: true,
         cities,
     }),
@@ -100,18 +98,14 @@ export default {
             }
         },
         post() {
-            firebase.postsCollection.add({
-                created: moment().format(),
-                likes: 0,
-                comments: 0,
-                userId: store.getters.user.uid,
-                userName: store.getters.user.displayName,
+            const newPost = {
                 landlord: this.landlord,
                 city: this.city,
                 address: this.address,
                 description: this.description,
-                isAnonymous: this.anonymous,
-            }).then((result) => {
+                isAnonymous: this.isAnonymous,
+            };
+            createNewPostPromise(newPost).then((result) => {
                 console.log(result);
                 router.push('/');
             }).catch((error) => {
