@@ -4,6 +4,7 @@
         <input
             class="switch"
             type="checkbox"
+            :checked="value"
             @input="$emit('input', $event.target.checked)"
         >
     </div>
