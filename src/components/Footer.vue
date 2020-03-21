@@ -12,7 +12,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
-    footer
-        background-color #3b4045
+<style lang="sass" scoped>
+footer
+    background-color: #3b4045
 </style>

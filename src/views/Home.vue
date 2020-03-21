@@ -13,32 +13,17 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
 import { mapState } from 'vuex';
-import firebase from '@/firebase';
+import firebaseFunctions from '@/firebase/functions';
 import store from '@/store';
 import Page from '@/components/Page.vue';
 import Card from '@/components/Card.vue';
-// TODO what is even happenign here
 // eslint-disable-next-line no-unused-vars
 import PostInterface from '@/interfaces/post';
 
-firebase.postsCollection
-    .orderBy('created', 'desc')
-    .onSnapshot(async (snapshot) => {
-        const posts: PostInterface[] = [];
-        snapshot.forEach((document) => {
-            const data = document.data();
-            const post = {
-                id: document.id,
-                ...data,
-            };
-            posts.push(post);
-        });
-        store.dispatch('setPosts', posts);
-    });
+firebaseFunctions.fetchAllPosts();
 
-export default Vue.extend({
+export default {
     name: 'Home',
     components: {
         Page,
@@ -50,19 +35,15 @@ export default Vue.extend({
     data: () => ({
         name: store.getters.userDisplayName,
         isLoggedIn: store.getters.isLoggedIn,
-        // posts: store.getters.posts,
     }),
-    async mounted() {
-        // await store.dispatch('fetchPosts');
-    },
-});
+};
 </script>
 
-<style lang="stylus">
-    .page
-        display flex
-        flex-direction column
+<style lang="sass" scoped>
+.page
+    display: flex
+    flex-direction: column
 
-    .posts
-        margin-bottom 1.5rem
+.posts
+    margin-bottom: 1.5rem
 </style>

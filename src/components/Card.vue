@@ -13,13 +13,13 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
-    .card
-        -webkit-box-shadow: 5px 10px 10px 5px rgba(0,0,0,0.27);
-        -moz-box-shadow: 5px 10px 10px 5px rgba(0,0,0,0.27);
-        box-shadow: 5px 10px 10px 5px rgba(0,0,0,0.27);
+<style lang="sass" scoped>
+.card
+    -webkit-box-shadow: 5px 10px 10px 5px rgba(0,0,0,0.27)
+    -moz-box-shadow: 5px 10px 10px 5px rgba(0,0,0,0.27)
+    box-shadow: 5px 10px 10px 5px rgba(0,0,0,0.27)
 
-        background-color white
-        border-radius 15px
-        padding 3rem 3rem 3rem 3rem
+    background-color: #fff
+    border-radius: 15px
+    padding: 3rem 3rem 3rem 3rem
 </style>

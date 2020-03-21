@@ -22,23 +22,20 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus">
-    .pageContainer
-        display grid
-        grid-template-areas \
-            "header header header" \
-            "nav content side" \
-            "footer footer footer"
-        grid-template-columns 1fr 2fr 1fr
-        grid-template-rows auto 1fr auto
-        height 100vh
+<style lang="sass" scoped>
+.pageContainer
+    display: grid
+    grid-template-areas: "header header header" "nav content side" "footer footer footer"
+    grid-template-columns: 1fr 2fr 1fr
+    grid-template-rows: auto 1fr auto
+    height: 100vh
 
-    header
-        grid-area header
-    .page
-        grid-area content
-        margin-top 2rem
-        margin-bottom 2.5rem
-    footer
-        grid-area footer
+header
+    grid-area: header
+.page
+    grid-area: content
+    margin-top: 2rem
+    margin-bottom: 2.5rem
+footer
+    grid-area: footer
 </style>

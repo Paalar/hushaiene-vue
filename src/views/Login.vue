@@ -1,32 +1,32 @@
 <template>
     <page>
-        <div class="login">
-            <button v-on:click="signInGoogle">
-                Login
-            </button>
-        </div>
+        <card>
+            <div class="login">
+                <div class="cardTitle">
+                    <h1>Logg inn</h1>
+                </div>
+                <google-login/>
+            </div>
+        </card>
     </page>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
 import store from '@/store';
-// import storeTypes from '@/store/types';
 import firebase from 'firebase';
 import router from '@/router';
 import Page from '@/components/Page.vue';
+import Card from '@/components/Card.vue';
+import GoogleLogin from '@/components/form/GoogleLogin.vue';
 
-const provider = new firebase.auth.GoogleAuthProvider();
-
-export default Vue.extend({
+export default {
     name: 'Login',
     components: {
         Page,
+        Card,
+        GoogleLogin,
     },
     methods: {
-        signInGoogle: () => {
-            firebase.auth().signInWithRedirect(provider);
-        },
         redirectGoogle: () => {
             if (store.getters.isLoggedIn) {
                 router.push('/');
@@ -60,5 +60,12 @@ export default Vue.extend({
     mounted() {
         this.redirectGoogle();
     },
-});
+};
 </script>
+
+<style lang="sass" scoped>
+@import '@/assets/css/common.sass'
+
+.loginInfo
+    margin-bottom: 3rem
+</style>
