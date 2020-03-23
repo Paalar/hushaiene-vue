@@ -11,10 +11,12 @@ const { currentUser } = auth;
 
 // firebase collections
 const postsCollection = db.collection('posts');
+const usersCollection = db.collection('users');
 
 export default {
     db,
     auth,
     currentUser,
     postsCollection,
+    usersCollection,
 };

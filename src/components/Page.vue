@@ -1,10 +1,12 @@
 <template>
     <div class="pageContainer">
-        <nav-header />
+        <nav-header class="header"/>
         <div class="page">
-            <slot class="pageContent"></slot>
+            <div class="nav"><slot name="nav"></slot></div>
+            <div class="content"><slot></slot></div>
+            <div class="side"><slot name="side"></slot></div>
         </div>
-        <page-footer />
+        <page-footer class="footer"/>
     </div>
 </template>
 
@@ -25,17 +27,28 @@ export default Vue.extend({
 <style lang="sass" scoped>
 .pageContainer
     display: grid
-    grid-template-areas: "header header header" "nav content side" "footer footer footer"
+    grid-template-areas: "header header header" "page page page" "footer footer footer"
     grid-template-columns: 1fr 2fr 1fr
     grid-template-rows: auto 1fr auto
     height: 100vh
 
-header
+.header
     grid-area: header
+
 .page
-    grid-area: content
-    margin-top: 2rem
-    margin-bottom: 2.5rem
-footer
+    display: grid
+    grid-area: page
+    grid-template-areas: "nav content side"
+    grid-template-columns: 1fr 2fr 1fr
+
+.footer
     grid-area: footer
+
+.nav
+    grid-area: nav
+.content
+    grid-area: content
+    padding: 2rem 0
+.side
+    grid-area: side
 </style>

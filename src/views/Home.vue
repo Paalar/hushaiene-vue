@@ -2,15 +2,18 @@
     <page>
         <card
             class="posts"
-            :class="{'hidden' : loaded}"
-            v-for="post in posts"
+            :class="{'hidden' : !loaded}"
+            v-for="post in postsData.posts"
             :key="post.id"
         >
             <ol v-for="(value, name, index) in post" :key="index">
                 {{name}} : {{ value }}
             </ol>
         </card>
-        <spinner class="spinner" :hidden="!loaded" />
+        <spinner class="spinner" :hidden="loaded" />
+        <card v-if="postsData.loaded && postsData.posts.length === 0">
+            <h1>Ingen poster tilgjengelig</h1>
+        </card>
     </page>
 </template>
 
@@ -32,9 +35,9 @@ export default {
         Spinner,
     },
     computed: {
-        ...mapState(['posts']),
+        ...mapState(['postsData']),
         loaded() {
-            return this.posts.length === 0;
+            return this.postsData.loaded;
         },
     },
     data: () => ({
