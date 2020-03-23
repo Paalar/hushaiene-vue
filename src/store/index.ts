@@ -10,14 +10,20 @@ Vue.use(Vuex);
 interface storeState {
     user?: Object,
     token?: String,
-    posts: Post[]
+    postsData: {
+        posts: Post[],
+        loaded: boolean,
+    },
 }
 
 export default new Vuex.Store({
     state: {
         user: undefined,
         token: undefined,
-        posts: [],
+        postsData: {
+            posts: [],
+            loaded: false,
+        },
     } as storeState,
     getters: {
         isLoggedIn: (state) => state.user != null,
@@ -36,7 +42,7 @@ export default new Vuex.Store({
             return undefined;
         },
         localStorageToken: (state) => window.localStorage.getItem('token'),
-        posts: (state) => state.posts,
+        posts: (state) => state.postsData.posts,
     },
     mutations: {
         signIn: async (state, user) => {
@@ -54,7 +60,10 @@ export default new Vuex.Store({
             state.token = token;
         },
         setPosts: async (state, newPosts) => {
-            state.posts = [...newPosts];
+            state.postsData = {
+                posts: [...newPosts],
+                loaded: true,
+            };
         },
     },
     actions: {

@@ -54,7 +54,9 @@ $button-border-red: 2px solid $red-main
         background-color: #e0e0e0
         color: $input-gray
         border-color: #e0e0e0
+        cursor: not-allowed
         &:hover
+            cursor:not-allowed
             border-color: #e0e0e0
             background-color: #e0e0e0
             color: $input-gray
