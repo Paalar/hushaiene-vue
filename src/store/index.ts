@@ -1,8 +1,9 @@
 /* eslint-disable no-param-reassign */
 import Vue from 'vue';
 import Vuex from 'vuex';
-import Post from '@/interfaces/firebase';
+import { Post } from '@/interfaces/firebase';
 // import types from './types';
+import profileModule from './modules/profile';
 
 Vue.use(Vuex);
 
@@ -71,5 +72,6 @@ export default new Vuex.Store({
         },
     },
     modules: {
+        profile: profileModule,
     },
 });
