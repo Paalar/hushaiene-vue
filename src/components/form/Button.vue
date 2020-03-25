@@ -16,7 +16,7 @@ export default {
         buttonType: {
             type: String,
             default: 'button',
-            validator(value) {
+            validator(value: string) {
                 return ['button', 'submit'].indexOf(value) !== -1;
             },
         },
