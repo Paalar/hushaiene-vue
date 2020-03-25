@@ -1,15 +1,12 @@
 <template>
     <page>
-        <card
+        <post
             class="posts"
             :class="{'hidden' : !loaded}"
             v-for="post in postsData.posts"
             :key="post.id"
-        >
-            <ol v-for="(value, name, index) in post" :key="index">
-                {{name}} : {{ value }}
-            </ol>
-        </card>
+            :post="post"
+            />
         <spinner class="spinner" :hidden="loaded" />
         <card v-if="postsData.loaded && postsData.posts.length === 0">
             <h1>Ingen poster tilgjengelig</h1>
@@ -24,6 +21,7 @@ import store from '@/store';
 import Page from '@/components/Page.vue';
 import Card from '@/components/Card.vue';
 import Spinner from '@/components/Spinner.vue';
+import Post from '@/components/Post.vue';
 
 firebaseFunctions.fetchAllPosts();
 
@@ -32,6 +30,7 @@ export default {
     components: {
         Page,
         Card,
+        Post,
         Spinner,
     },
     computed: {
