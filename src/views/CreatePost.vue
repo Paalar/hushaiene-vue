@@ -38,11 +38,12 @@
                     <f-button
                         id="post"
                         :class="{ 'hidden' : posting }"
-                        :text="'Send inn'"
                         :color="'red'"
                         :buttonType="'submit'"
                         :disabled="disabled"
-                    />
+                    >
+                        Send inn
+                    </f-button>
                     <spinner :hidden="!posting" />
                 </div>
             </form>

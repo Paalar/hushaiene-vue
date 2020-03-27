@@ -6,7 +6,7 @@
         :type="buttonType"
         :disabled="disabled"
     >
-        {{ text }}
+        <slot></slot>
     </button>
 </template>
 
@@ -30,7 +30,6 @@ export default {
                 return isValid;
             },
         },
-        text: String,
         disabled: {
             type: Boolean,
             default: false,
