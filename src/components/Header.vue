@@ -1,6 +1,11 @@
 <template>
     <header>
-        <h1 id="title">Hushaiene</h1>
+        <div id="title">
+            <h1>
+                Hushaiene
+            </h1>
+            <HusHaieneLogo />
+        </div>
         <h3
             v-for="path in paths"
             :key="path.path"
@@ -32,15 +37,17 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
 import { signOut } from '@/firebase/functions';
 import store from '@/store';
 import router from '@/router';
 import Button from '@/components/form/Button.vue';
+import HusHaieneLogo from '@/../public/images/hushai.svg';
 
-export default Vue.extend({
+export default {
+    name: 'Header',
     components: {
         'f-button': Button,
+        HusHaieneLogo,
     },
     methods: {
         pushLocation(componentName: string, path: string) {
@@ -85,35 +92,32 @@ export default Vue.extend({
             },
         },
     }),
-});
+};
 </script>
 
 <style lang="sass" scoped>
 @import '@/assets/css/common.sass'
 
 $profileSVG: url('../assets/images/profile.svg')
-$titleSVG: url('../assets/images/hushai.svg')
+
+.hushai
+    height: 3rem
+    padding-left: 1rem
 
 header
     background-color: $red-main
     display: grid
-    grid-template-columns: repeat(9, auto)
+    grid-template-columns: repeat(10, 10%)
 
     button
         grid-column: 10
         margin: auto
 
 #title
-    font-size: 2.7em
-    margin-left: 0.2em
+    padding: 0.5rem 0 0 0.5rem
     grid-column: 1 / span 2
+    align-items: baseline
     display: flex
-    flex-direction: row
-    align-items: center
-    justify-content: center
-    &:after
-        width: 15%
-        content: $titleSVG
 
 .subTitle
     margin: auto

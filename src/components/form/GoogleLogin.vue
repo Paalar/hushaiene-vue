@@ -1,7 +1,7 @@
 <template>
     <div class="loginButton">
         <button @click="signIn" :class="{ 'hidden' : redirecting }">
-            <img src="@/assets/images/google-logo.svg" />
+            <google-logo />
             <span>Logg inn med google</span>
         </button>
         <spinner :hide="!redirecting"/>
@@ -11,6 +11,7 @@
 <script lang="ts">
 import Spinner from '@/components/Spinner.vue';
 import { signInWithGoogle } from '@/firebase/functions';
+import GoogleLogo from '@/../public/images/google-logo.svg';
 
 export default {
     data() {
@@ -20,6 +21,7 @@ export default {
     },
     components: {
         Spinner,
+        GoogleLogo,
     },
     methods: {
         signIn() {
@@ -62,4 +64,8 @@ img
     align-items: bottom
     > *
         position: absolute
+
+.google
+    margin-right: 1rem
+    background-color: #fff
 </style>
