@@ -23,6 +23,12 @@
                 >
                     {{ post.isAnonymous ? 'Anonym' : post.userName }}
                 </span>
+                <span
+                    v-else
+                    class="delete"
+                >
+                    slett
+                </span>
             </div>
         </div>
     </card>
@@ -95,7 +101,7 @@ export default {
         grid-area: stats
         display: flex
         justify-content: space-between
-    .poster
+    .poster, .delete
         text-align: right
         grid-area: poster
 </style>
