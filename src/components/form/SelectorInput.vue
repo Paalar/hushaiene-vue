@@ -75,8 +75,6 @@ export default {
 
 <style lang="sass" scoped>
 @import '@/assets/css/common.sass'
-$arrow-up: url('../../../public/images/arrow-up.svg')
-$arrow-down: url('../../../public/images/arrow-down.svg')
 $arrow-width: 10%
 
 .arrowUp, .arrowDown

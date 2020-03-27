@@ -14,6 +14,7 @@
             :class="['subTitle', {'activePage' : isActive === path.path}]"
             @click="pushLocation(path.name, path.path)"
         >
+            <span v-if="path.svg"><ProfileSVG/></span>
             {{ path.title }}
         </h3>
 
@@ -42,12 +43,14 @@ import store from '@/store';
 import router from '@/router';
 import Button from '@/components/form/Button.vue';
 import HusHaieneLogo from '@/../public/images/hushai.svg';
+import ProfileSVG from '@/../public/images/profile.svg';
 
 export default {
     name: 'Header',
     components: {
         'f-button': Button,
         HusHaieneLogo,
+        ProfileSVG,
     },
     methods: {
         pushLocation(componentName: string, path: string) {
@@ -89,6 +92,7 @@ export default {
                 needAuth: true,
                 title: store.getters.userDisplayName,
                 id: 'profile',
+                svg: ProfileSVG,
             },
         },
     }),
@@ -98,17 +102,17 @@ export default {
 <style lang="sass" scoped>
 @import '@/assets/css/common.sass'
 
-$profileSVG: url('../assets/images/profile.svg')
-
 .hushai
     height: 3rem
     padding-left: 1rem
+.profile
+    height: 2rem
+    padding-right: 1rem
 
 header
     background-color: $red-main
     display: grid
     grid-template-columns: repeat(10, 10%)
-
     button
         grid-column: 10
         margin: auto
@@ -134,18 +138,10 @@ header
     grid-column: 6
 
 #profile
-    margin: inherit
-    margin-bottom: auto
-    margin-top: auto
-    grid-column: 9
+    grid-column: 8 / span 2
     display: flex
     flex-direction: row
     align-items: center
-    justify-content: center
-    &:before
-        padding-right: 1rem
-        width: 15%
-        content: $profileSVG
 
 .activePage
     border-bottom-style: solid
