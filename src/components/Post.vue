@@ -11,12 +11,26 @@
             <div class="description">
                 <p>{{ post.description }}</p>
             </div>
+            <div class="information">
+                <span class="created">{{ format(post.created) }}</span>
+                <div class="stats">
+                    <span class="comments">{{ post.comments }} kommentarer</span>
+                    <span class="likes">{{ post.likes }} likes</span>
+                </div>
+                <span
+                    class="poster"
+                    v-if="!owner"
+                >
+                    {{ post.isAnonymous ? 'Anonym' : post.userName }}
+                </span>
+            </div>
         </div>
     </card>
 </template>
 
 <script lang="ts">
 import Card from '@/components/Card.vue';
+import moment from 'moment';
 
 export default {
     components: {
@@ -24,6 +38,13 @@ export default {
     },
     props: {
         post: Object,
+        owner: {
+            type: Boolean,
+            default: false,
+        },
+    },
+    methods: {
+        format: (time: string) => moment(time).format('DD/MM/YYYY'),
     },
 };
 </script>
@@ -32,7 +53,12 @@ export default {
 @import '@/assets/css/common.sass'
 .post
     display: grid
-    grid-template-areas: "title title title location" "desc desc desc desc"
+    grid-row-gap: 1rem
+    row-gap: 1rem
+    grid-template-areas: "title title title location" "desc desc desc desc" "info info info info"
+    h1
+        &::first-letter
+            color: $red-main
 
 .title
     grid-area: title
@@ -50,4 +76,26 @@ export default {
         margin-right: 0.5rem
 .description
     grid-area: desc
+    padding-bottom: 2rem
+
+.information
+    grid-area: info
+    display: grid
+    justify-content: center
+    grid-template-areas: "date stats stats poster"
+    grid-template-columns: repeat(4, 25%)
+    .created, .poster
+        color: gray
+
+    .created
+        grid-area: date
+        text-align: left
+    .stats
+        text-align: center
+        grid-area: stats
+        display: flex
+        justify-content: space-between
+    .poster
+        text-align: right
+        grid-area: poster
 </style>
