@@ -12,10 +12,13 @@
                 class="selector"
                 :class="showItems ? 'open' : 'closed' "
             >
+            <div class="selectedContainer" :class="showItems ? 'open' : 'closed'" >
                 <p
                     class="selected"
-                    :class="showItems ? 'open' : 'closed' "
                 >{{ selected }}</p>
+                <ArrowUpSVG v-if="showItems" />
+                <ArrowDownSVG v-if="!showItems" />
+            </div>
                 <div
                     class="itemContainer"
                     v-if="showItems"
@@ -35,7 +38,14 @@
 </template>
 
 <script lang="ts">
+import ArrowUpSVG from '@/../public/images/arrow-up.svg';
+import ArrowDownSVG from '@/../public/images/arrow-down.svg';
+
 export default {
+    components: {
+        ArrowUpSVG,
+        ArrowDownSVG,
+    },
     props: {
         value: String,
         items: Array,
@@ -65,9 +75,19 @@ export default {
 
 <style lang="sass" scoped>
 @import '@/assets/css/common.sass'
-$arrow-up: url('../../assets/images/arrow-up.svg')
-$arrow-down: url('../../assets/images/arrow-down.svg')
 $arrow-width: 10%
+
+.arrowUp, .arrowDown
+    width: 8%
+    margin: 1rem
+
+.selectedContainer
+    display: flex
+    justify-content: space-between
+    &.open
+        background-color: $disabled-gray
+        border-top-left-radius: 5px
+        border-top-right-radius: 5px
 
 .selected
     display: flex
@@ -75,17 +95,6 @@ $arrow-width: 10%
     justify-content: space-between
     align-items: center
     user-select: none
-    &.closed
-        &:after
-            width: $arrow-width
-            content: $arrow-down
-    &.open
-        background-color: $disabled-gray
-        border-top-left-radius: 5px
-        border-top-right-radius: 5px
-        &:after
-            width: $arrow-width
-            content: $arrow-up
 
 .selector
     background-color: #fff
