@@ -1,24 +1,22 @@
 <template>
     <div>
-        <card>
-            <h1>Innlegg</h1>
-        </card>
-        <card
-            v-for="(post, name) in posts"
-            :key="name"
-        >
-            {{ post }}
-        </card>
+        <post
+            class="posts"
+            v-for="post in posts"
+            :key="post.id"
+            :post="post"
+            :owner="true"
+        />
     </div>
 </template>
 
 <script lang="ts">
 import { mapState } from 'vuex';
-import Card from '@/components/Card.vue';
+import Post from '@/components/Post.vue';
 
 export default {
     components: {
-        Card,
+        Post,
     },
     computed: {
         ...mapState('profile', {
@@ -30,5 +28,6 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-
+.posts
+    margin-bottom: 1.5rem
 </style>

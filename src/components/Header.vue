@@ -17,15 +17,17 @@
             v-if="!isLoggedIn"
             @on-click="goLogin"
             :color="'white'"
-            :text="'Logg inn'"
-        />
+        >
+            Logg inn
+        </f-button>
         <f-button
             v-else
             id=".sign"
             @on-click="signOut"
             :color="'white'"
-            :text="'Logg ut'"
-        />
+        >
+            Logg ut
+        </f-button>
     </header>
 </template>
 
