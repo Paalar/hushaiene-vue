@@ -58,7 +58,25 @@ const createNewPostPromise = (postData: NewPost) => (
         })
 );
 
+const deletePostReference = (postId: string) => {
+    const postRef = firebaseConfig.postsCollection.doc(postId);
+    postRef.delete();
+};
+
+const deletePost = (postId: string, userId: string) => {
+    const userRef = firebaseConfig.usersCollection.doc(userId);
+    const userPostCollection = userRef.collection('posts');
+    const postRef = userPostCollection.doc(postId);
+    postRef.delete();
+};
+
+const deleteUserPost = async (postId: string, userId: string) => {
+    deletePost(postId, userId);
+    deletePostReference(postId);
+};
+
 export default {
     fetchAllUserPosts,
     createNewPostPromise,
+    deleteUserPost,
 };

@@ -18,7 +18,7 @@
             <div class="content"><slot></slot></div>
             <div class="buttons">
                 <f-button
-                    class="decline"
+                    class="accept"
                     color="red"
                     :on-click="clicked"
                 >

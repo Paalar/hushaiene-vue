@@ -26,6 +26,7 @@
                 <span
                     v-else
                     class="delete"
+                    @click="openModal(post.id)"
                 >
                     slett
                 </span>
@@ -48,6 +49,7 @@ export default {
             type: Boolean,
             default: false,
         },
+        openModal: Function,
     },
     methods: {
         format: (time: string) => moment(time).format('DD/MM/YYYY'),
