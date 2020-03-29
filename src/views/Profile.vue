@@ -11,7 +11,7 @@
 
 <script lang=ts>
 import store from '@/store';
-import { fetchAllUserPosts } from '@/firebase/functions';
+import UserFunctions from '@/firebase/functions/user';
 import Page from '@/components/Page.vue';
 import SideBar from '@/components/SideBar.vue';
 
@@ -22,7 +22,7 @@ export default {
         SideBar,
     },
     mounted() {
-        fetchAllUserPosts(store.getters.user);
+        UserFunctions.fetchAllUserPosts(store.getters.user);
     },
 };
 </script>

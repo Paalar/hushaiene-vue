@@ -15,7 +15,7 @@
 import Page from '@/components/Page.vue';
 import Card from '@/components/Card.vue';
 import GoogleLogin from '@/components/form/GoogleLogin.vue';
-import { getRedirectFromGoogle } from '@/firebase/functions';
+import LoginFunctions from '@/firebase/functions/login';
 
 export default {
     name: 'Login',
@@ -25,7 +25,7 @@ export default {
         GoogleLogin,
     },
     mounted() {
-        getRedirectFromGoogle();
+        LoginFunctions.getRedirectFromGoogle();
     },
 };
 </script>

@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import Spinner from '@/components/Spinner.vue';
-import { signInWithGoogle } from '@/firebase/functions';
+import LoginFunctions from '@/firebase/functions';
 import GoogleLogo from '@/../public/images/google-logo.svg';
 
 export default {
@@ -25,7 +25,7 @@ export default {
     },
     methods: {
         signIn() {
-            signInWithGoogle();
+            LoginFunctions.signInWithGoogle();
             this.$data.redirecting = true;
         },
     },

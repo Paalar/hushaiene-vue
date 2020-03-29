@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { signOut } from '@/firebase/functions';
+import LoginFunctions from '@/firebase/functions/login';
 import store from '@/store';
 import router from '@/router';
 import Button from '@/components/form/Button.vue';
@@ -62,7 +62,7 @@ export default {
         goLogin() {
             this.pushLocation('Login', '/login');
         },
-        signOut: () => signOut(),
+        signOut: () => LoginFunctions.signOut(),
     },
     data: () => ({
         isLoggedIn: store.getters.isLoggedIn,

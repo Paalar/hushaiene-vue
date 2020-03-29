@@ -16,14 +16,14 @@
 
 <script lang="ts">
 import { mapState } from 'vuex';
-import firebaseFunctions from '@/firebase/functions';
+import StandardFunctions from '@/firebase/functions/standard';
 import store from '@/store';
 import Page from '@/components/Page.vue';
 import Card from '@/components/Card.vue';
 import Spinner from '@/components/Spinner.vue';
 import Post from '@/components/Post.vue';
 
-firebaseFunctions.fetchAllPosts();
+StandardFunctions.fetchAllPosts();
 
 export default {
     name: 'Home',

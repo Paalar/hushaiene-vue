@@ -53,7 +53,7 @@
 
 <script lang="ts">
 import router from '@/router';
-import { createNewPostPromise } from '@/firebase/functions';
+import UserFunctions from '@/firebase/functions/user';
 import Page from '@/components/Page.vue';
 import Card from '@/components/Card.vue';
 import TextInput from '@/components/form/TextInput.vue';
@@ -113,7 +113,7 @@ export default {
                 description: this.description,
                 isAnonymous: this.isAnonymous,
             };
-            createNewPostPromise(newPost).then(() => {
+            UserFunctions.createNewPostPromise(newPost).then(() => {
                 router.push('/');
             }).catch((error) => {
                 // TODO better error handling
